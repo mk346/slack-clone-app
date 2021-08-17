@@ -13,12 +13,13 @@ function ChatInput( channelName, channelId) {
         e.preventDefault();
 
         if (channelId){
-            db.collection("rooms").doc(channelId).collection("messages")({ //breaks here: error unknown for now
+            db.collection("rooms").doc(channelId).collection("messages").add({ //breaks here: error unknown for now ,you can correct it if you know whats happenning..
                 message: input,
-                timestamp: firebase.firestore.FieldValue.server,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 user: user.displayName,
                 userImage: user.photoURL,
             });
+            setInput('');
 
         }
 
